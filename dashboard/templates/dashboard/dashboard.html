@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block msg %}
+  {% if messages %}
+  {% for message in messages %}
+   <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
+    <strong>{{message}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+   </div>
+  {% endfor %}
+  {% endif %}
+{% endblock msg %}
+
+{% block content %}
+
+<div class="container">
+<div class="row">
+ {% if subject %}
+{% for sub in subject %}
+    <div class="col-md-4">
+      <div class="card mx-5 mt-5" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body text-center">
+            <h4 class="card-title">{{sub.subject_name|capfirst}}</h4>
+              <footer class="blockquote-footer mb-2">instructor <cite title="Source Title">{{sub.teacher_id|capfirst}}</cite></footer>
+            <a href="{% url 'topicview' sub.id  %}" class="btn btn-primary stretched-link">Go</a>
+        </div>
+      </div>
+    </div>
+{% endfor %} 
+
+ {% else %}
+<div class="alert alert-warning" role="alert">
+  <p>No Record in the database</p>
+</div>
+{% endif %}
+</div>
+</div>
+{% endblock content %}

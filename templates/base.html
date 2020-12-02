@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>webapp</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+ 
+<style>
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+
+  {% comment %} background-image: linear-gradient(109.6deg,rgba(40,109,108,1)11.2%,rgba(51,8,103,1)92.5%);  {% endcomment %}
+  {% comment %} background: url("{% static 'img/bg1.jpg' %}") no-repeat; {% endcomment %}
+  background-size: cover; }
+
+hr {
+border : 0;
+height: 2px; 
+background-image: linear-gradient(to right, #f953c610, #b91d73, #f953c610); 
+}
+</style>
+</head>
+<body>
+
+<div class="container-fluid">
+  {% include "navbar.html" %}
+</div>
+
+  <div class="wrapper">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-sm-12">
+        {% block msg %}
+        {% endblock msg %}
+      </div>
+    </div>
+
+      <div class="row">
+        {% block side %}
+        {% endblock side %}
+
+        {% block content %}
+        {% endblock content %}
+      </div>
+ </div>
+</div>
+<div class="container-fluid text-white" style="background:#234567">
+{% include "footer.html" %} 
+</div> 
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/popper.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/all.min.js' %}"></script>
+</body>
+</html>

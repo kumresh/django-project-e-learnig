@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block msg %}
+  {% if messages %}
+  {% for message in messages %}
+   <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
+    <strong>{{message}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+   </div>
+  {% endfor %}
+  {% endif %}
+{% endblock msg %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+
+ <div class="card shadow p-3 mb-5 bg-white rounded">
+        <h5 class="card-header text-center alert-info">Add Topic</h5>
+     <div class="card-body">
+    
+  <form id="hide_button" action="" method="post" novalidate>
+   {% csrf_token %}
+        {{form.teacher_id|as_crispy_field}}
+         {{form.subject_id|as_crispy_field}}
+         {{form.topic_name|as_crispy_field}}
+         {{form.url|as_crispy_field}}
+          <br>
+      <input type="submit" class="btn btn-success" value="Add">
+    </form>
+    </div>
+    </div>
+</div>
+
+{% endblock content %}

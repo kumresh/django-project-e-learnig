@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block msg %}
+  {% if messages %}
+  {% for message in messages %}
+   <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
+    <strong>{{message}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+   </div>
+  {% endfor %}
+  {% endif %}
+{% endblock msg %}
+
+{% block content %}
+
+<div class="container">
+   <div class="card bg-light shadow p-3 mb-5 rounded">
+       <h5 class="card-header text-center alert-info">My Course</h5>
+     <div class="card-body">
+     {% if course %}  
+      <table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Course Name</th>
+      <th scope="col">Semester</th>
+      <th scope="col">created Date</th>
+      <th scope="col">Total student</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for co in course %}
+    <tr>
+      <th scope="row">{{co.id}}</th>
+      <td>{{co.course_name}}</td>
+      <td>{{co.semester}}</td>
+      <td>{{co.created}}</td>
+      <td>
+      <a href="{% url 'studentlist' %}" target="_blank" rel="noopener noreferrer">
+      {{count}}</a></td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% else %}
+   <div class="alert alert-primary text-center" role="alert">
+  <p>No Record found in database</p>
+</div>
+{% endif %}
+  
+  </div>
+  </div>
+<hr>
+
+<p>
+  <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+<i class="fa fa-plus" aria-hidden="true"></i> Add Course
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+ <div class="card shadow-lg p-3 mb-5 bg-light rounded">
+        <h5 class="card-header text-center alert-info">Add Course</h5>
+     <div class="card-body">
+    
+  <form id="hide_button" action="" method="post" novalidate>
+   {% csrf_token %}
+         {{form.teacher_id|as_crispy_field}}
+         {{form.course_name|as_crispy_field}}
+         {{form.semester|as_crispy_field}}
+          <br>
+      <input type="submit" class="btn btn-success" value="Add">
+    </form>
+    </div>
+    </div>
+</div>
+
+</div>
+
+{% endblock content %}
